@@ -24,29 +24,34 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       justify-content: flex-start;
-      gap: 60px;
-      padding: 80px 20px;
+      gap: 15px;
+      padding: 30px;
     }
 
     .logo-card {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
+      background: linear-gradient(135deg, #111111, #1a1a1a);
+      border: 2px solid #c0c0c0;
+      border-radius: 8px;
+      padding: 10px 18px;
+      width: 380px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), inset 0 0 10px rgba(192, 192, 192, 0.15);
     }
 
     .scene {
-      perspective: 1400px;
+      perspective: 800px;
     }
 
     .coin {
-      width: 260px;
-      height: 260px;
+      width: 60px;
+      height: 60px;
       position: relative;
       transform-style: preserve-3d;
-      transform: rotateX(12deg);
+      transform: rotateX(10deg);
       animation: professionalSpin 7s linear infinite;
     }
 
@@ -69,27 +74,27 @@
     }
 
     .coin-front {
-      transform: translateZ(12px);
+      transform: translateZ(6px);
     }
 
     .coin-back {
-      transform: rotateY(180deg) translateZ(12px) scaleX(-1);
+      transform: rotateY(180deg) translateZ(6px) scaleX(-1);
     }
 
     .logo-title {
-      color: #e5e7eb;
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: 3px;
+      color: #f3f4f6;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
     }
 
     @keyframes professionalSpin {
       0% {
-        transform: rotateX(12deg) rotateY(0deg);
+        transform: rotateX(10deg) rotateY(0deg);
       }
       100% {
-        transform: rotateX(12deg) rotateY(360deg);
+        transform: rotateX(10deg) rotateY(360deg);
       }
     }
   </style>
@@ -104,7 +109,7 @@
           <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF.HEIC" alt="Logo 1"></div>
         </div>
       </div>
-      <div class="logo-title">Лого 1</div>
+      <div class="logo-title">STARTER AI PACKAGE</div>
     </div>
 
     <div class="logo-card">
@@ -114,7 +119,7 @@
           <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%202.HEIC" alt="Logo 2"></div>
         </div>
       </div>
-      <div class="logo-title">Лого 2</div>
+      <div class="logo-title">SMART TRADER PACKAGE</div>
     </div>
 
     <div class="logo-card">
@@ -124,7 +129,7 @@
           <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%203.HEIC" alt="Logo 3"></div>
         </div>
       </div>
-      <div class="logo-title">Лого 3</div>
+      <div class="logo-title">PRO AI TRADER PACKAGE</div>
     </div>
 
     <div class="logo-card">
@@ -134,7 +139,7 @@
           <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%204.HEIC" alt="Logo 4"></div>
         </div>
       </div>
-      <div class="logo-title">Лого 4</div>
+      <div class="logo-title">EXECUTIVE TRADER PACKAGE</div>
     </div>
 
     <div class="logo-card">
@@ -144,7 +149,7 @@
           <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%205.HEIC" alt="Logo 5"></div>
         </div>
       </div>
-      <div class="logo-title">Лого 5</div>
+      <div class="logo-title">TYCOON AI PACKAGE</div>
     </div>
 
     <div class="logo-card">
@@ -154,7 +159,7 @@
           <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%206.HEIC" alt="Logo 6"></div>
         </div>
       </div>
-      <div class="logo-title">Лого 6</div>
+      <div class="logo-title">EXECUTIVE TYCOON PACKAGE</div>
     </div>
 
     <div class="logo-card">
@@ -164,7 +169,7 @@
           <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%207.HEIC" alt="Logo 7"></div>
         </div>
       </div>
-      <div class="logo-title">Лого 7</div>
+      <div class="logo-title">PREMIUM TRADER PACKAGE</div>
     </div>
 
     <div class="logo-card">
@@ -174,7 +179,7 @@
           <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%208.HEIC" alt="Logo 8"></div>
         </div>
       </div>
-      <div class="logo-title">Лого 8</div>
+      <div class="logo-title">INFINITY TRADER PACKAGE</div>
     </div>
 
     <div class="logo-card">
@@ -184,7 +189,7 @@
           <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%209.HEIC" alt="Logo 9"></div>
         </div>
       </div>
-      <div class="logo-title">Лого 9</div>
+      <div class="logo-title">ULTIMATE AI PACKAGE</div>
     </div>
   </div>
 
