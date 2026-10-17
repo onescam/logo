@@ -33,28 +33,28 @@
     }
 
     #main-view {
-      gap: 16px;
+      gap: 10px;
       max-width: 100%;
       margin: 0 auto;
-      padding: 30px 20px;
+      padding: 20px;
     }
 
     .package-row {
       display: flex;
       align-items: center;
-      gap: 25px;
+      gap: 20px;
       width: 100%;
       background: linear-gradient(135deg, #0d0d0d, #161616);
       border: 2px solid #c0c0c0;
-      border-radius: 12px;
-      padding: 15px 30px;
+      border-radius: 10px;
+      padding: 8px 25px;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .package-row:hover {
       transform: scale(1.005);
-      box-shadow: 0 0 25px rgba(192, 192, 192, 0.25);
+      box-shadow: 0 0 20px rgba(192, 192, 192, 0.2);
     }
 
     .scene {
@@ -63,8 +63,8 @@
     }
 
     .coin {
-      width: 65px;
-      height: 65px;
+      width: 75px;
+      height: 75px;
       position: relative;
       transform-style: preserve-3d;
       animation: smoothSpin 6s linear infinite;
@@ -91,7 +91,7 @@
     }
 
     .package-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -101,38 +101,50 @@
     #detail-view {
       position: relative;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       text-align: center;
-      gap: 25px;
-      padding: 50px 20px;
+      gap: 20px;
+      padding: 30px 20px;
+    }
+
+    .detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      max-width: 650px;
+      gap: 20px;
+      margin-bottom: 10px;
     }
 
     .back-btn {
-      position: absolute;
-      top: 30px;
-      left: 30px;
       background: none;
-      border: 2px solid #c0c0c0;
+      border: none;
       color: #ffffff;
-      font-size: 24px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
+      font-size: 32px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
+      padding: 0;
+      line-height: 1;
+      transition: opacity 0.2s;
     }
 
     .back-btn:hover {
-      background: rgba(192, 192, 192, 0.2);
+      opacity: 0.7;
+    }
+
+    .detail-title {
+      font-size: 26px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-align: left;
     }
 
     .detail-logo-container {
-      width: 200px;
-      height: 200px;
-      margin-top: 10px;
+      width: 240px;
+      height: 240px;
+      margin: 10px 0;
     }
 
     .detail-logo-container img {
@@ -141,25 +153,17 @@
       object-fit: contain;
     }
 
-    .detail-title {
-      font-size: 30px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #ffffff;
-    }
-
     .detail-info {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       background: #111111;
       border: 1px solid #333333;
-      padding: 25px 40px;
-      border-radius: 14px;
+      padding: 20px 30px;
+      border-radius: 12px;
       max-width: 650px;
       width: 100%;
-      font-size: 18px;
+      font-size: 17px;
       text-align: left;
     }
 
@@ -167,7 +171,7 @@
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid #222222;
-      padding-bottom: 10px;
+      padding-bottom: 8px;
     }
 
     .upgrade-btn {
@@ -175,17 +179,159 @@
       color: #ffffff;
       border: none;
       border-radius: 25px;
-      padding: 16px 40px;
-      font-size: 20px;
+      padding: 14px 35px;
+      font-size: 18px;
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.2s, transform 0.1s;
-      margin-top: 10px;
+      margin-top: 5px;
     }
 
     .upgrade-btn:hover {
       background-color: #0056b3;
       transform: scale(1.02);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #121212;
+      border: 2px solid #c0c0c0;
+      border-radius: 15px;
+      padding: 25px;
+      max-width: 450px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-title {
+      font-size: 22px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ffffff;
+    }
+
+    .crypto-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .crypto-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1a1a1a;
+      border: 1px solid #444;
+      border-radius: 10px;
+      padding: 12px 15px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .crypto-btn:hover {
+      border-color: #007bff;
+    }
+
+    .crypto-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .crypto-info img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    .crypto-name {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .crypto-amount {
+      font-size: 15px;
+      color: #00ffcc;
+    }
+
+    .status-box {
+      background: #1e1e1e;
+      border: 1px dashed #666;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 14px;
+      color: #ffcc00;
+      font-weight: bold;
+    }
+
+    .copy-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .copy-text {
+      background: #090909;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 13px;
+      color: #ccc;
+      text-align: left;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background-color: #28a745;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .copy-btn:hover {
+      background-color: #218838;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .close-modal:hover {
+      color: #fff;
     }
 
     @keyframes smoothSpin {
@@ -199,22 +345,22 @@
 
     @media (max-width: 768px) {
       .package-title {
-        font-size: 15px;
+        font-size: 14px;
       }
       .package-row {
-        padding: 12px 15px;
+        padding: 6px 15px;
         gap: 15px;
       }
       .coin {
-        width: 50px;
-        height: 50px;
-      }
-      .detail-info {
-        padding: 15px 20px;
-        font-size: 15px;
+        width: 60px;
+        height: 60px;
       }
       .detail-title {
-        font-size: 22px;
+        font-size: 18px;
+      }
+      .detail-info {
+        padding: 15px;
+        font-size: 14px;
       }
     }
   </style>
@@ -224,13 +370,55 @@
   <div id="main-view" class="view active"></div>
 
   <div id="detail-view" class="view">
-    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="detail-header">
+      <button class="back-btn" onclick="goBack()">←</button>
+      <div class="detail-title" id="detail-name"></div>
+    </div>
     <div class="detail-logo-container">
       <img id="detail-img" src="" alt="Logo">
     </div>
-    <div class="detail-title" id="detail-name"></div>
     <div class="detail-info" id="detail-specs"></div>
-    <button class="upgrade-btn" id="upgrade-btn" onclick="revealPrice()">Ботов Upgrade</button>
+    <button class="upgrade-btn" onclick="openModal()">Upgrade</button>
+  </div>
+
+  <div class="modal-overlay" id="payment-modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal()">×</button>
+      <div class="modal-title">Начин на плащане</div>
+      
+      <div class="crypto-options">
+        <div class="crypto-btn" onclick="selectCrypto('BTC', 68000)">
+          <div class="crypto-info">
+            <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png" alt="BTC">
+            <span class="crypto-name">BTC</span>
+          </div>
+          <span class="crypto-amount" id="btc-amount">-</span>
+        </div>
+
+        <div class="crypto-btn" onclick="selectCrypto('ETH', 2600)">
+          <div class="crypto-info">
+            <img src="https://assets.coingecko.com/coins/images/279/large/ethereum.png" alt="ETH">
+            <span class="crypto-name">ETH</span>
+          </div>
+          <span class="crypto-amount" id="eth-amount">-</span>
+        </div>
+
+        <div class="crypto-btn" onclick="selectCrypto('USDT', 1)">
+          <div class="crypto-info">
+            <img src="https://assets.coingecko.com/coins/images/325/large/Tether.png" alt="USDT">
+            <span class="crypto-name">USDT</span>
+          </div>
+          <span class="crypto-amount" id="usdt-amount">-</span>
+        </div>
+      </div>
+
+      <div class="status-box">ОПЦИЯТА ВСЕ ОЩЕ НЕ Е НАЛИЧНА</div>
+
+      <div class="copy-section">
+        <div class="copy-text" id="copy-text-content">Моля изпратете точното количество на посочения крипто адрес иначе плащането ще бъде невалидно</div>
+        <button class="copy-btn" onclick="copyText()">Копирай съобщението</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -238,6 +426,7 @@
       {
         name: "STARTER AI PACKAGE",
         price: "$150.00",
+        numericPrice: 150,
         fee: "6.0%",
         allocation: "15 Trades / day",
         concurrent: "2 simultaneously",
@@ -247,6 +436,7 @@
       {
         name: "SMART TRADER PACKAGE",
         price: "$380.00",
+        numericPrice: 380,
         fee: "6.0%",
         allocation: "20 Trades / day",
         concurrent: "3 simultaneously",
@@ -256,6 +446,7 @@
       {
         name: "PRO AI TRADER PACKAGE",
         price: "$950.00",
+        numericPrice: 950,
         fee: "6.0%",
         allocation: "25 Trades / day",
         concurrent: "5 simultaneously",
@@ -265,6 +456,7 @@
       {
         name: "EXECUTIVE TRADER PACKAGE",
         price: "$2,400.00",
+        numericPrice: 2400,
         fee: "5.5%",
         allocation: "35 Trades / day",
         concurrent: "8 simultaneously",
@@ -274,6 +466,7 @@
       {
         name: "TYCOON AI PACKAGE",
         price: "$6,000.00",
+        numericPrice: 6000,
         fee: "5.5%",
         allocation: "50 Trades / day",
         concurrent: "12 simultaneously",
@@ -283,6 +476,7 @@
       {
         name: "EXECUTIVE TYCOON PACKAGE",
         price: "$15,000.00",
+        numericPrice: 15000,
         fee: "5.0%",
         allocation: "70 Trades / day",
         concurrent: "18 simultaneously",
@@ -292,6 +486,7 @@
       {
         name: "PREMIUM TRADER PACKAGE",
         price: "$37,500.00",
+        numericPrice: 37500,
         fee: "5.0%",
         allocation: "90 Trades / day",
         concurrent: "25 simultaneously",
@@ -301,6 +496,7 @@
       {
         name: "INFINITY TRADER PACKAGE",
         price: "$93,500.00",
+        numericPrice: 93500,
         fee: "4.5%",
         allocation: "120 Trades / day",
         concurrent: "40 simultaneously",
@@ -310,6 +506,7 @@
       {
         name: "ULTIMATE AI PACKAGE",
         price: "$235,000.00",
+        numericPrice: 235000,
         fee: "4.0%",
         allocation: "150 Trades / day",
         concurrent: "65 simultaneously",
@@ -323,7 +520,7 @@
     const detailImg = document.getElementById('detail-img');
     const detailName = document.getElementById('detail-name');
     const detailSpecs = document.getElementById('detail-specs');
-    const upgradeBtn = document.getElementById('upgrade-btn');
+    const paymentModal = document.getElementById('payment-modal');
 
     let currentPackage = null;
 
@@ -353,12 +550,12 @@
       detailImg.src = pkg.img;
       detailName.textContent = pkg.name;
       detailSpecs.innerHTML = `
+        <div><span>Package Price:</span> <strong>${pkg.price}</strong></div>
         <div><span>Withdrawal Fee:</span> <strong>${pkg.fee}</strong></div>
         <div><span>Daily Trade Allocation:</span> <strong>${pkg.allocation}</strong></div>
         <div><span>Max. Concurrent Execution:</span> <strong>${pkg.concurrent}</strong></div>
         <div><span>NEURAL CAP:</span> <strong>${pkg.neural}</strong></div>
       `;
-      upgradeBtn.textContent = "Ботов Upgrade";
     }
 
     function goBack() {
@@ -366,10 +563,24 @@
       mainView.classList.add('active');
     }
 
-    function revealPrice() {
+    function openModal() {
       if (currentPackage) {
-        upgradeBtn.textContent = `Price: ${currentPackage.price}`;
+        document.getElementById('btc-amount').textContent = (currentPackage.numericPrice / 68000).toFixed(6) + ' BTC';
+        document.getElementById('eth-amount').textContent = (currentPackage.numericPrice / 2600).toFixed(4) + ' ETH';
+        document.getElementById('usdt-amount').textContent = currentPackage.numericPrice.toLocaleString() + ' USDT';
       }
+      paymentModal.classList.add('active');
+    }
+
+    function closeModal() {
+      paymentModal.classList.remove('active');
+    }
+
+    function copyText() {
+      const text = document.getElementById('copy-text-content').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Текстът е копиран успешно!');
+      });
     }
 
     renderMain();
