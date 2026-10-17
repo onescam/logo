@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rotating Logos</title>
+  <title>Investment Packages</title>
   <style>
     * {
       margin: 0;
@@ -13,46 +13,61 @@
 
     body, html {
       width: 100%;
-      height: 100%;
+      min-height: 100vh;
       background-color: #030303;
-      overflow-x: hidden;
       font-family: sans-serif;
+      color: #ffffff;
+      overflow-x: hidden;
     }
 
-    .container {
+    .view {
+      display: none;
       width: 100%;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 15px;
-      padding: 30px;
+      padding: 20px;
     }
 
-    .logo-card {
+    .view.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #main-view {
+      gap: 16px;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .package-row {
       display: flex;
       align-items: center;
-      gap: 18px;
-      background: linear-gradient(135deg, #111111, #1a1a1a);
+      gap: 25px;
+      width: 100%;
+      background: linear-gradient(135deg, #0d0d0d, #161616);
       border: 2px solid #c0c0c0;
-      border-radius: 8px;
-      padding: 10px 18px;
-      width: 380px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), inset 0 0 10px rgba(192, 192, 192, 0.15);
+      border-radius: 12px;
+      padding: 15px 30px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .package-row:hover {
+      transform: scale(1.005);
+      box-shadow: 0 0 25px rgba(192, 192, 192, 0.25);
     }
 
     .scene {
       perspective: 800px;
+      flex-shrink: 0;
     }
 
     .coin {
-      width: 60px;
-      height: 60px;
+      width: 65px;
+      height: 65px;
       position: relative;
       transform-style: preserve-3d;
-      transform: rotateX(10deg);
-      animation: professionalSpin 7s linear infinite;
+      animation: smoothSpin 6s linear infinite;
     }
 
     .coin-side {
@@ -63,135 +78,301 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-radius: 50%;
-      overflow: hidden;
     }
 
     .coin-side img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-    }
-
-    .coin-front {
-      transform: translateZ(6px);
+      object-fit: contain;
     }
 
     .coin-back {
-      transform: rotateY(180deg) translateZ(6px) scaleX(-1);
+      transform: rotateY(180deg);
     }
 
-    .logo-title {
-      color: #f3f4f6;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 1.2px;
+    .package-title {
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 2px;
       text-transform: uppercase;
+      color: #f3f4f6;
     }
 
-    @keyframes professionalSpin {
+    #detail-view {
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 25px;
+      padding: 50px 20px;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      background: none;
+      border: 2px solid #c0c0c0;
+      color: #ffffff;
+      font-size: 24px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .back-btn:hover {
+      background: rgba(192, 192, 192, 0.2);
+    }
+
+    .detail-logo-container {
+      width: 200px;
+      height: 200px;
+      margin-top: 10px;
+    }
+
+    .detail-logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .detail-title {
+      font-size: 30px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .detail-info {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #111111;
+      border: 1px solid #333333;
+      padding: 25px 40px;
+      border-radius: 14px;
+      max-width: 650px;
+      width: 100%;
+      font-size: 18px;
+      text-align: left;
+    }
+
+    .detail-info div {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #222222;
+      padding-bottom: 10px;
+    }
+
+    .upgrade-btn {
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 25px;
+      padding: 16px 40px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      margin-top: 10px;
+    }
+
+    .upgrade-btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.02);
+    }
+
+    @keyframes smoothSpin {
       0% {
-        transform: rotateX(10deg) rotateY(0deg);
+        transform: rotateY(0deg);
       }
       100% {
-        transform: rotateX(10deg) rotateY(360deg);
+        transform: rotateY(360deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .package-title {
+        font-size: 15px;
+      }
+      .package-row {
+        padding: 12px 15px;
+        gap: 15px;
+      }
+      .coin {
+        width: 50px;
+        height: 50px;
+      }
+      .detail-info {
+        padding: 15px 20px;
+        font-size: 15px;
+      }
+      .detail-title {
+        font-size: 22px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="logo-card">
-      <div class="scene">
-        <div class="coin">
-          <div class="coin-side coin-front"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF.HEIC" alt="Logo 1"></div>
-          <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF.HEIC" alt="Logo 1"></div>
-        </div>
-      </div>
-      <div class="logo-title">STARTER AI PACKAGE</div>
-    </div>
+  <div id="main-view" class="view active"></div>
 
-    <div class="logo-card">
-      <div class="scene">
-        <div class="coin">
-          <div class="coin-side coin-front"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%202.HEIC" alt="Logo 2"></div>
-          <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%202.HEIC" alt="Logo 2"></div>
-        </div>
-      </div>
-      <div class="logo-title">SMART TRADER PACKAGE</div>
+  <div id="detail-view" class="view">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="detail-logo-container">
+      <img id="detail-img" src="" alt="Logo">
     </div>
-
-    <div class="logo-card">
-      <div class="scene">
-        <div class="coin">
-          <div class="coin-side coin-front"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%203.HEIC" alt="Logo 3"></div>
-          <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%203.HEIC" alt="Logo 3"></div>
-        </div>
-      </div>
-      <div class="logo-title">PRO AI TRADER PACKAGE</div>
-    </div>
-
-    <div class="logo-card">
-      <div class="scene">
-        <div class="coin">
-          <div class="coin-side coin-front"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%204.HEIC" alt="Logo 4"></div>
-          <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%204.HEIC" alt="Logo 4"></div>
-        </div>
-      </div>
-      <div class="logo-title">EXECUTIVE TRADER PACKAGE</div>
-    </div>
-
-    <div class="logo-card">
-      <div class="scene">
-        <div class="coin">
-          <div class="coin-side coin-front"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%205.HEIC" alt="Logo 5"></div>
-          <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%205.HEIC" alt="Logo 5"></div>
-        </div>
-      </div>
-      <div class="logo-title">TYCOON AI PACKAGE</div>
-    </div>
-
-    <div class="logo-card">
-      <div class="scene">
-        <div class="coin">
-          <div class="coin-side coin-front"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%206.HEIC" alt="Logo 6"></div>
-          <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%206.HEIC" alt="Logo 6"></div>
-        </div>
-      </div>
-      <div class="logo-title">EXECUTIVE TYCOON PACKAGE</div>
-    </div>
-
-    <div class="logo-card">
-      <div class="scene">
-        <div class="coin">
-          <div class="coin-side coin-front"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%207.HEIC" alt="Logo 7"></div>
-          <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%207.HEIC" alt="Logo 7"></div>
-        </div>
-      </div>
-      <div class="logo-title">PREMIUM TRADER PACKAGE</div>
-    </div>
-
-    <div class="logo-card">
-      <div class="scene">
-        <div class="coin">
-          <div class="coin-side coin-front"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%208.HEIC" alt="Logo 8"></div>
-          <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%208.HEIC" alt="Logo 8"></div>
-        </div>
-      </div>
-      <div class="logo-title">INFINITY TRADER PACKAGE</div>
-    </div>
-
-    <div class="logo-card">
-      <div class="scene">
-        <div class="coin">
-          <div class="coin-side coin-front"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%209.HEIC" alt="Logo 9"></div>
-          <div class="coin-side coin-back"><img src="https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%209.HEIC" alt="Logo 9"></div>
-        </div>
-      </div>
-      <div class="logo-title">ULTIMATE AI PACKAGE</div>
-    </div>
+    <div class="detail-title" id="detail-name"></div>
+    <div class="detail-info" id="detail-specs"></div>
+    <button class="upgrade-btn" id="upgrade-btn" onclick="revealPrice()">Ботов Upgrade</button>
   </div>
 
+  <script>
+    const packages = [
+      {
+        name: "STARTER AI PACKAGE",
+        price: "$150.00",
+        fee: "6.0%",
+        allocation: "15 Trades / day",
+        concurrent: "2 simultaneously",
+        neural: "390 Trades",
+        img: "https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF.HEIC"
+      },
+      {
+        name: "SMART TRADER PACKAGE",
+        price: "$380.00",
+        fee: "6.0%",
+        allocation: "20 Trades / day",
+        concurrent: "3 simultaneously",
+        neural: "520 Trades",
+        img: "https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%202.HEIC"
+      },
+      {
+        name: "PRO AI TRADER PACKAGE",
+        price: "$950.00",
+        fee: "6.0%",
+        allocation: "25 Trades / day",
+        concurrent: "5 simultaneously",
+        neural: "650 Trades",
+        img: "https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%203.HEIC"
+      },
+      {
+        name: "EXECUTIVE TRADER PACKAGE",
+        price: "$2,400.00",
+        fee: "5.5%",
+        allocation: "35 Trades / day",
+        concurrent: "8 simultaneously",
+        neural: "910 Trades",
+        img: "https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%204.HEIC"
+      },
+      {
+        name: "TYCOON AI PACKAGE",
+        price: "$6,000.00",
+        fee: "5.5%",
+        allocation: "50 Trades / day",
+        concurrent: "12 simultaneously",
+        neural: "1,300 Trades",
+        img: "https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%205.HEIC"
+      },
+      {
+        name: "EXECUTIVE TYCOON PACKAGE",
+        price: "$15,000.00",
+        fee: "5.0%",
+        allocation: "70 Trades / day",
+        concurrent: "18 simultaneously",
+        neural: "1,820 Trades",
+        img: "https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%206.HEIC"
+      },
+      {
+        name: "PREMIUM TRADER PACKAGE",
+        price: "$37,500.00",
+        fee: "5.0%",
+        allocation: "90 Trades / day",
+        concurrent: "25 simultaneously",
+        neural: "2,340 Trades",
+        img: "https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%207.HEIC"
+      },
+      {
+        name: "INFINITY TRADER PACKAGE",
+        price: "$93,500.00",
+        fee: "4.5%",
+        allocation: "120 Trades / day",
+        concurrent: "40 simultaneously",
+        neural: "3,120 Trades",
+        img: "https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%208.HEIC"
+      },
+      {
+        name: "ULTIMATE AI PACKAGE",
+        price: "$235,000.00",
+        fee: "4.0%",
+        allocation: "150 Trades / day",
+        concurrent: "65 simultaneously",
+        neural: "3,900 Trades",
+        img: "https://raw.githubusercontent.com/onescam/logo/main/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20HEIF%209.HEIC"
+      }
+    ];
+
+    const mainView = document.getElementById('main-view');
+    const detailView = document.getElementById('detail-view');
+    const detailImg = document.getElementById('detail-img');
+    const detailName = document.getElementById('detail-name');
+    const detailSpecs = document.getElementById('detail-specs');
+    const upgradeBtn = document.getElementById('upgrade-btn');
+
+    let currentPackage = null;
+
+    function renderMain() {
+      mainView.innerHTML = '';
+      packages.forEach((pkg) => {
+        const row = document.createElement('div');
+        row.className = 'package-row';
+        row.onclick = () => showDetail(pkg);
+        row.innerHTML = `
+          <div class="scene">
+            <div class="coin">
+              <div class="coin-side"><img src="${pkg.img}" alt="${pkg.name}"></div>
+              <div class="coin-side coin-back"><img src="${pkg.img}" alt="${pkg.name}"></div>
+            </div>
+          </div>
+          <div class="package-title">${pkg.name}</div>
+        `;
+        mainView.appendChild(row);
+      });
+    }
+
+    function showDetail(pkg) {
+      currentPackage = pkg;
+      mainView.classList.remove('active');
+      detailView.classList.add('active');
+      detailImg.src = pkg.img;
+      detailName.textContent = pkg.name;
+      detailSpecs.innerHTML = `
+        <div><span>Withdrawal Fee:</span> <strong>${pkg.fee}</strong></div>
+        <div><span>Daily Trade Allocation:</span> <strong>${pkg.allocation}</strong></div>
+        <div><span>Max. Concurrent Execution:</span> <strong>${pkg.concurrent}</strong></div>
+        <div><span>NEURAL CAP:</span> <strong>${pkg.neural}</strong></div>
+      `;
+      upgradeBtn.textContent = "Ботов Upgrade";
+    }
+
+    function goBack() {
+      detailView.classList.remove('active');
+      mainView.classList.add('active');
+    }
+
+    function revealPrice() {
+      if (currentPackage) {
+        upgradeBtn.textContent = `Price: ${currentPackage.price}`;
+      }
+    }
+
+    renderMain();
+  </script>
 </body>
 </html>
